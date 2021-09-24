@@ -1,5 +1,5 @@
 {
-  "name": "@joeattardi/emoji-button",
+  "name": "@joepheijnen/emoji-button",
   "version": "4.6.0",
   "description": "Vanilla JavaScript emoji picker",
   "keywords": [
@@ -22,10 +22,10 @@
   "author": "Joe Attardi <jattardi@gmail.com> (https://joeattardi.codes)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/joeattardi/emoji-button.git"
+    "url": "https://github.com/joepheijnen/emoji-button.git"
   },
   "homepage": "https://emoji-button.js.org",
-  "bugs": "https://github.com/joeattardi/emoji-button/issues",
+  "bugs": "https://github.com/joepheijnen/emoji-button/issues",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.10.2",
