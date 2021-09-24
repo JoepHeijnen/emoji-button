@@ -50,6 +50,7 @@ const DEFAULT_OPTIONS: EmojiButtonOptions = {
   position: 'auto',
   autoHide: true,
   autoFocusSearch: true,
+  focusTrap: true,
   showAnimation: true,
   showPreview: true,
   showSearch: true,
@@ -353,13 +354,15 @@ export class EmojiButton {
    * Initializes the emoji picker's focus trap.
    */
   private initFocusTrap(): void {
-    this.focusTrap = createFocusTrap(this.pickerEl as HTMLElement, {
-      clickOutsideDeactivates: true,
-      initialFocus:
-        this.options.showSearch && this.options.autoFocusSearch
-          ? '.emoji-picker__search'
-          : '.emoji-picker__emoji[tabindex="0"]'
-    });
+    if (this.options.focusTrap) {
+      this.focusTrap = createFocusTrap(this.pickerEl as HTMLElement, {
+        clickOutsideDeactivates: true,
+        initialFocus:
+          this.options.showSearch && this.options.autoFocusSearch
+            ? '.emoji-picker__search'
+            : '.emoji-picker__emoji[tabindex="0"]'
+      });
+    }
   }
 
   /**
@@ -527,8 +530,11 @@ export class EmojiButton {
    */
   hidePicker(): void {
     this.hideInProgress = true;
-    this.focusTrap.deactivate();
     this.pickerVisible = false;
+
+    if (this.options.focusTrap) {
+      this.focusTrap.deactivate();
+    }
 
     if (this.overlay) {
       document.body.removeChild(this.overlay);
@@ -592,7 +598,9 @@ export class EmojiButton {
 
     this.determineDisplay(referenceEl);
 
-    this.focusTrap.activate();
+    if (this.options.focusTrap) {
+      this.focusTrap.activate();
+    }
 
     setTimeout(() => {
       this.addEventListeners();
